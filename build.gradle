@@ -19,6 +19,8 @@ tasks.withType(JavaCompile) {
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
+
 
     implementation 'com.codeborne:selenide:7.6.0'
     implementation 'io.qameta.allure:allure-junit5:2.29.1'
