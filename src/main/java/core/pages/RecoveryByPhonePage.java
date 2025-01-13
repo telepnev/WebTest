@@ -11,11 +11,12 @@ import static com.codeborne.selenide.Selenide.$x;
 public class RecoveryByPhonePage extends BasePage {
 
     protected SelenideElement setPhoneField = $("#field_phone");
-    protected SelenideElement setCountry = $("[data-l='t,country']");
+    protected SelenideElement setCountry = $x("//div[@data-l='t,country']");
     protected SelenideElement submitSmsCodeButton = $("[data-l='t,submit']");
     protected SelenideElement missingDigitsMessage = $x("//div[contains(text(),'Осталось ввести')]");
     protected SelenideElement incorrectPhoneNumberMessage = $x("//div[contains(text(),'Неправильный номер телефона.')]");
     protected SelenideElement extraNumbersMessage = $x("//div[contains(text(),'лишних цифр')]");
+    protected SelenideElement dropDownCountry = $("#country");
 
     {
         verifyPageElements();
@@ -24,7 +25,7 @@ public class RecoveryByPhonePage extends BasePage {
     @Step("Проверяем видимость всех элементов на странице")
     private void verifyPageElements() {
         setPhoneField.shouldBe(visible);
-      //  setCountry.shouldBe(visible);
+        //  setCountry.shouldBe(visible);
         submitSmsCodeButton.shouldBe(visible);
     }
 
@@ -65,4 +66,15 @@ public class RecoveryByPhonePage extends BasePage {
         incorrectPhoneNumberMessage.shouldBe(exist);
         incorrectPhoneNumberMessage.shouldBe(visible);
     }
+
+    @Step("Выбираем код страны по названию: {countryName}")
+    public String selectCountryByName(String countryName) {
+        setCountry.click();
+        SelenideElement countryItem = $(String.format(".country-select_i[data-name='%s']", countryName));
+        countryItem.scrollTo();
+        String countryCode = countryItem.find(".country-select_code").text();
+        countryItem.click();
+        return countryCode;
+    }
+
 }
