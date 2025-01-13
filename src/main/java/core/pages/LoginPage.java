@@ -18,9 +18,13 @@ public class LoginPage extends BasePage {
     protected SelenideElement registrationButton = $x("//div[@class='external-oauth-login-footer']/a[@data-l='t,register']");
     protected SelenideElement enterByQrCodeButton = $(".qr-button-label");
     protected SelenideElement troubleLoggingInButton = $x("//a[@tsid='restore']");
-    protected SelenideElement registrationByVk = $x("//div[@class='soc-login-widget']//a[@data-module='registration/vkconnect']");
+    protected SelenideElement registrationByVk = $("[data-l='t,vkc']");
     protected SelenideElement registrationByMailru = $x("//a[@data-l='t,mailru']");
     protected SelenideElement registrationByYandex = $x("//a[@data-l='t,yandex']");
+
+    // страница восстановления пароля
+    protected SelenideElement recProfButton = $x("//div[@class='form-actions']/button[@tsid='restore']");
+    protected SelenideElement returnToLoginPage = $x("//div[@class='form-actions']/a[@data-l='t,cancel']");
 
     // footer
     protected SelenideElement footerBloke = $x("//div[@id='footer']");
@@ -76,8 +80,22 @@ public class LoginPage extends BasePage {
         signInButton.click();
     }
 
+    @Step("Вводим Логин пользователя")
+    public void setLogin(String login) {
+        loginField.shouldBe(visible).click();
+        loginField.shouldBe(visible).clear();
+        loginField.shouldBe(visible).setValue(login);
+    }
+
+    @Step("Вводим Пароль пользователя")
+    public void setPassword(String password) {
+        passwordField.shouldBe(visible).click();
+        passwordField.shouldBe(visible).clear();
+        passwordField.shouldBe(visible).setValue(password);
+    }
+
     @Step("Кликаем по кнопке 'Войти в Одноклассники'")
-    public void clickToSignInButton() {
+    public void clickToLoginButton() {
         signInButton.click();
     }
 
@@ -121,6 +139,16 @@ public class LoginPage extends BasePage {
     @Step("Логинимся по Yandex")
     public void loginWithYandex() {
         registrationByYandex.shouldBe(visible).click();
+    }
+
+    @Step("Нажимаем кнопку Восстановить профиль")
+    public void gotoRecovery() {
+        recProfButton.shouldBe(visible).click();
+    }
+
+    @Step("Нажимаем кнопку Вернуться к авторизации")
+    public void returnToLoginPage() {
+        returnToLoginPage.shouldBe(visible).click();
     }
 
 }

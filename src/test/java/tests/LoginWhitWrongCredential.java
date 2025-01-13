@@ -83,7 +83,7 @@ public class LoginWhitWrongCredential extends BaseTest {
     @Test
     public void loginWithoutCredential() {
         step("Оставляем поля логин и пароль пустые и жмем кнопку 'Войти в Одноклассники' ", () -> {
-            loginPage.clickToSignInButton();
+            loginPage.clickToLoginButton();
         });
 
         step("Проверяем что сообщение о ошибки появилось", () -> {
