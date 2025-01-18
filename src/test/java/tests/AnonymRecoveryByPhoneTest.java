@@ -6,12 +6,12 @@ import core.pages.AnonymRecoveryPage;
 import core.pages.ConfermPhoneSmsPage;
 import core.pages.LoginPage;
 import core.pages.RecoveryByPhonePage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnonymRecoveryByPhoneTest extends BaseTest {
     private static LoginPage loginPage;
@@ -49,17 +49,17 @@ public class AnonymRecoveryByPhoneTest extends BaseTest {
 
         recoveryByPhonePage = new RecoveryByPhonePage();
         step("Вводим номер телефона", () -> {
-        recoveryByPhonePage.setPhoneNumber("79031112233");
+            recoveryByPhonePage.setPhoneNumber("79031112233");
         });
         step("Кликкаем по кнопке получить СмС", () -> {
-        recoveryByPhonePage.clickGetSmsButton();
+            recoveryByPhonePage.clickGetSmsButton();
         });
         confermSmsPage = new ConfermPhoneSmsPage();
         step("Вводим полученный СмС", () -> {
-        confermSmsPage.setSmsCode("1234");
+            confermSmsPage.setSmsCode("1234");
         });
         step("Проверяем что сообщение ошибки появилось", () -> {
-        confermSmsPage.checkingIncorrectSmsCodeMessage();
+            confermSmsPage.checkingIncorrectSmsCodeMessage();
         });
     }
 
@@ -72,10 +72,10 @@ public class AnonymRecoveryByPhoneTest extends BaseTest {
 
         recoveryByPhonePage = new RecoveryByPhonePage();
         step("Вводим номер телефона", () -> {
-        recoveryByPhonePage.setPhoneNumber("7903111223");
+            recoveryByPhonePage.setPhoneNumber("7903111223");
         });
         step("Проверяем что сообщение ошибки появилось", () -> {
-        recoveryByPhonePage.checkingMessageAboutMissingDigits();
+            recoveryByPhonePage.checkingMessageAboutMissingDigits();
         });
     }
 
@@ -88,10 +88,10 @@ public class AnonymRecoveryByPhoneTest extends BaseTest {
 
         recoveryByPhonePage = new RecoveryByPhonePage();
         step("Вводим номер телефона", () -> {
-        recoveryByPhonePage.setPhoneNumber("7903111223344");
+            recoveryByPhonePage.setPhoneNumber("7903111223344");
         });
         step("Проверяем что сообщение ошибки появилось", () -> {
-        recoveryByPhonePage.checkingMessageAboutExtraNumbers();
+            recoveryByPhonePage.checkingMessageAboutExtraNumbers();
         });
     }
 
@@ -99,18 +99,39 @@ public class AnonymRecoveryByPhoneTest extends BaseTest {
     public void messageIncorrectPhoneNumberTest() {
         anonymRecoveryPage = new AnonymRecoveryPage();
         step("Переходим на страницу восстановления пароля", () -> {
-        anonymRecoveryPage.gotoRecoveryByPoneButton();
+            anonymRecoveryPage.gotoRecoveryByPoneButton();
         });
 
         recoveryByPhonePage = new RecoveryByPhonePage();
         step("Вводим номер телефона", () -> {
-        recoveryByPhonePage.setPhoneNumber("790311122");
+            recoveryByPhonePage.setPhoneNumber("790311122");
         });
         step("Жмем на кнопку получить Смс", () -> {
-        recoveryByPhonePage.clickGetSmsButton();
+            recoveryByPhonePage.clickGetSmsButton();
         });
         step("Проверяем что сообщение ошибки появилось", () -> {
-        recoveryByPhonePage.checkingMessageIncorrectPhoneNumber();
+            recoveryByPhonePage.checkingMessageIncorrectPhoneNumber();
         });
     }
+
+    @Test
+    public void checkCountryCodeByCountryName() {
+        anonymRecoveryPage = new AnonymRecoveryPage();
+        step("Переходим на страницу восстановления пароля", () -> {
+            anonymRecoveryPage.gotoRecoveryByPoneButton();
+        });
+
+        recoveryByPhonePage = new RecoveryByPhonePage();
+        step("Вводим название страны и проверяет соответствие телефонного кода страны", () -> {
+            String countryCode = recoveryByPhonePage.selectCountryByName("Афганистан");
+            Assertions.assertEquals("+93", countryCode);
+        });
+        step("Жмем на кнопку получить Смс", () -> {
+            recoveryByPhonePage.clickGetSmsButton();
+        });
+        step("Проверяем что сообщение ошибки появилось", () -> {
+            recoveryByPhonePage.checkingMessageIncorrectPhoneNumber();
+        });
+    }
+
 }
