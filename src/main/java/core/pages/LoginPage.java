@@ -14,6 +14,9 @@ public class LoginPage extends BasePage {
     protected SelenideElement passwordField = $("#field_password");
     protected SelenideElement signInButton = $x("//input[@type='submit']");
 
+    //search input
+    protected SelenideElement searchInput = $("[data-tsid='toolbar-search-input']");
+
     // buttons
     protected SelenideElement registrationButton = $x("//div[@class='external-oauth-login-footer']/a[@data-l='t,register']");
     protected SelenideElement enterByQrCodeButton = $(".qr-button-label");
@@ -151,4 +154,14 @@ public class LoginPage extends BasePage {
         returnToLoginPage.shouldBe(visible).click();
     }
 
+    @Step("Нажимаем кнопку Не получается войти?")
+    public void gotoHelpDesc() {
+        troubleLoggingInButton.click();
+    }
+
+    @Step("Вводим в поле поиск данные и жмем 'Enter'")
+    public void search(String search) {
+        searchInput.setValue(search);
+        searchInput.pressEnter();
+    }
 }
