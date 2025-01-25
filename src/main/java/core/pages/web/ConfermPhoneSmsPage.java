@@ -1,13 +1,14 @@
-package core.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
+import core.base.BasePage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class ConfermPhoneSmsPage extends BasePage{
+public class ConfermPhoneSmsPage extends BasePage {
     protected SelenideElement editPhoneButton = $("[data-l='t,edit_phone']");
     protected SelenideElement confirmCodeButton = $("[data-l='t,submit']");
     protected SelenideElement getNewSmsCodeButton = $("[data-l='t,get_code']");

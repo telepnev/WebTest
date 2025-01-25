@@ -1,8 +1,8 @@
-package tests;
+package tests.web;
 
 import com.github.javafaker.Faker;
 import core.base.BaseTest;
-import core.pages.LoginPage;
+import core.pages.web.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

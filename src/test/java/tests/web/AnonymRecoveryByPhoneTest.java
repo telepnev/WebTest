@@ -1,11 +1,11 @@
-package tests;
+package tests.web;
 
 import com.github.javafaker.Faker;
 import core.base.BaseTest;
-import core.pages.AnonymRecoveryPage;
-import core.pages.ConfermPhoneSmsPage;
-import core.pages.LoginPage;
-import core.pages.RecoveryByPhonePage;
+import core.pages.web.AnonymRecoveryPage;
+import core.pages.web.ConfermPhoneSmsPage;
+import core.pages.web.LoginPage;
+import core.pages.web.RecoveryByPhonePage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

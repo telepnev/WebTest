@@ -1,8 +1,8 @@
-package tests;
+package tests.web;
 
 import core.base.BaseTest;
-import core.pages.LoginPage;
-import core.pages.SearchPage;
+import core.pages.web.LoginPage;
+import core.pages.web.SearchPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
