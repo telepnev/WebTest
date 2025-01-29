@@ -2,6 +2,7 @@ package tests.mobile;
 
 import core.base.MobileBaseTest;
 import core.pages.mob.LoginPage;
+import core.pages.mob.MainMobilePage;
 import core.pages.mob.RecoveryPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,25 +14,28 @@ public class TransferringRecoveryTest extends MobileBaseTest {
     private static LoginPage loginPage;
     private static RecoveryPage recovery;
     private static TransferringRecoveryTest recoveryByPhone;
+    private static MainMobilePage mainMobilePage;
 
     @BeforeEach
     public void prePage() {
         step("Переходим на страницу", () -> {
             open(baseUrl);
         });
-        loginPage = new LoginPage();
     }
 
     @Test
     public void checkingTransferringRecoveryByPhone() {
+        mainMobilePage = new MainMobilePage();
         step("Жмем кнопку Войти", () -> {
-            loginPage.toSignIn();
+            mainMobilePage.toSignIn();
         });
+
+        loginPage = new LoginPage();
         step("Кликаем восстановить по 'Не получается войти?'", () -> {
             loginPage.toRecovery();
         });
-        recovery = new RecoveryPage();
 
+        recovery = new RecoveryPage();
         step("Кликаем кнопку 'Телефон'", () -> {
             recovery.toRecoverByPhone();
         });
@@ -44,14 +48,17 @@ public class TransferringRecoveryTest extends MobileBaseTest {
 
     @Test
     public void checkingTransferringRecoveryByMail() {
+        mainMobilePage = new MainMobilePage();
         step("Жмем кнопку Войти", () -> {
-            loginPage.toSignIn();
+            mainMobilePage.toSignIn();
         });
+
+        loginPage = new LoginPage();
         step("Кликаем восстановить по 'Не получается войти?'", () -> {
             loginPage.toRecovery();
         });
-        recovery = new RecoveryPage();
 
+        recovery = new RecoveryPage();
         step("Кликаем кнопку 'Телефон'", () -> {
             recovery.toRecoverByMail();
         });

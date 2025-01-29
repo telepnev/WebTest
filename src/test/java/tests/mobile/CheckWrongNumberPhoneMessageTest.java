@@ -2,6 +2,7 @@ package tests.mobile;
 
 import core.base.MobileBaseTest;
 import core.pages.mob.LoginPage;
+import core.pages.mob.MainMobilePage;
 import core.pages.mob.RecoveryByPhonePage;
 import core.pages.mob.RecoveryPage;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +15,13 @@ public class CheckWrongNumberPhoneMessageTest extends MobileBaseTest {
     private static LoginPage loginPage;
     private static RecoveryPage recovery;
     private static RecoveryByPhonePage recoveryByPhone;
+    private static MainMobilePage mainMobilePage;
 
     @BeforeEach
     public void prePage() {
         step("Переходим на страницу", () -> {
             open(baseUrl);
         });
-        loginPage = new LoginPage();
     }
 
     @Test
@@ -28,7 +29,10 @@ public class CheckWrongNumberPhoneMessageTest extends MobileBaseTest {
         String country = "Антильские острова";
         String phoneNumber = "123";
 
-        loginPage.toSignIn();
+        mainMobilePage = new MainMobilePage();
+        mainMobilePage.toSignIn();
+
+        loginPage = new LoginPage();
         loginPage.toRecovery();
 
         recovery = new RecoveryPage();

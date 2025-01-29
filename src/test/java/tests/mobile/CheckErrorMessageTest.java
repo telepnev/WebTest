@@ -1,8 +1,8 @@
 package tests.mobile;
 
 import core.base.MobileBaseTest;
-
 import core.pages.mob.LoginPage;
+import core.pages.mob.MainMobilePage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +11,7 @@ import static io.qameta.allure.Allure.step;
 
 public class CheckErrorMessageTest extends MobileBaseTest {
     private static LoginPage loginPage;
+    private static MainMobilePage mainMobilePage;
 
     @BeforeEach
     public void prePage() {
@@ -23,7 +24,8 @@ public class CheckErrorMessageTest extends MobileBaseTest {
     @Test
     public void checkLoginErrorMessage() {
         step("Жмем кнопку Войти", () -> {
-        loginPage.toSignIn();
+            mainMobilePage = new MainMobilePage();
+            mainMobilePage.toSignIn();
         });
         step("Вводим только пароль и нажимаем Войт", () -> {
         loginPage.toLoginWithoutLogin("123324");
