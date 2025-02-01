@@ -18,28 +18,37 @@ public class CheckErrorMessageTest extends MobileBaseTest {
         step("Переходим на страницу", () -> {
             open(baseUrl);
         });
-        loginPage = new LoginPage();
+
     }
 
     @Test
     public void checkLoginErrorMessage() {
+        mainMobilePage = new MainMobilePage();
+
         step("Жмем кнопку Войти", () -> {
-            mainMobilePage = new MainMobilePage();
             mainMobilePage.toSignIn();
         });
+
+        loginPage = new LoginPage();
+
         step("Вводим только пароль и нажимаем Войт", () -> {
-        loginPage.toLoginWithoutLogin("123324");
+            loginPage.toLoginWithoutLogin("123324");
         });
         step("Проверяем текст сообщения", () -> {
-        loginPage.checkLoginErrorMessage();
+            loginPage.checkLoginErrorMessage();
         });
     }
 
     @Test
     public void checkLoginErrorPasswordMessage() {
+        mainMobilePage = new MainMobilePage();
+
         step("Жмем кнопку Войти", () -> {
-            loginPage.toSignIn();
+            mainMobilePage.toSignIn();
         });
+
+        loginPage = new LoginPage();
+
         step("Вводим только пароль и нажимаем Войт", () -> {
             loginPage.toLoginWithoutPassword("samLogin");
         });
